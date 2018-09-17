@@ -1,0 +1,33 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  padding-right: 20%;
+  padding-left: 20%;
+  padding-top: 20px;
+}
+
+.form-container h3 {
+  align-self: flex-start;
+  font-size: 20px;
+}
+
+.form-container form {
+  display: flex;
+  border: 1px solid black;
+  align-items: center;
+  padding: 15px;
+}
+
+.form-container form button{
+  height: 38px;
+}
+
+.form-container form .form-group {
+  display: flex;
+  margin-bottom: 0;
+  flex: 1;
+}
+
+.form-container form .form-group input {
+  margin-right: 20px;
+}

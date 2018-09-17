@@ -1,0 +1,17 @@
+.items-container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20%;
+  padding-right: 20%;
+  margin-top: 40px;
+}
+
+.items-container h3 {
+  align-self: flex-start;
+  font-size: 20px;
+}
+
+.jumbotron{
+  
+  border: 1px solid black;
+}
