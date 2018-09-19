@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {connect } from 'react-redux'
 import './App.css';
 import Items from './components/Items'
 import NewItem from './components/NewItem'
@@ -10,11 +11,20 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Illuminate - react-redux</h1>
         </header>
-        <NewItem />
+        <NewItem data={this.props.editData}/>
         <Items />
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    editData: state.items.editingItem
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(App)

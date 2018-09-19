@@ -1,16 +1,40 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Button, Form, FormGroup, Input } from 'reactstrap';
-import { addItem } from '../../actions';
+import { addItem, saveItem } from '../../actions';
 import './style.css'
 
 class NewItem extends Component {
-  state = { product: '', qty: '', price: '' }
+  constructor(props) {
+    super(props)
+    this.state = {
+      product: '',
+      qty: '',
+      price: ''
+    }
+  }
+  // state = { product: this.props.data ? this.props.data['product'] this'', qty: '', price: '' }
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.data === null && prevProps.data !== this.props.data) {
+      this.setState({
+        product: this.props.data['product'],
+        qty: this.props.data['qty'],
+        price: this.props.data['price']
+      })
+    }
+  }
 
   onFormSubmit(e) {
-    const { addNewItem } = this.props
+    const { addNewItem, saveNewItem, data } = this.props
     e.preventDefault();
-    addNewItem(this.state)
+    if(data) {
+      saveNewItem({
+        ...this.state,
+        key: this.props.data['key']
+      })
+    }
+    else addNewItem(this.state)
     this.setState({
       product: '',
       qty: '',
@@ -49,7 +73,7 @@ class NewItem extends Component {
               required
             />
           </FormGroup>
-          <Button>Add</Button>
+          <Button>{ this.props.data ? "Save": "Add" }</Button>
         </Form>
       </div>
     )
@@ -58,7 +82,8 @@ class NewItem extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addNewItem: (item) => dispatch(addItem(item))
+    addNewItem: (item) => dispatch(addItem(item)),
+    saveNewItem: (item) => dispatch(saveItem(item))
   }
 }
 

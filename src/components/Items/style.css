@@ -15,3 +15,7 @@
   
   border: 1px solid black;
 }
+
+.fa-trash, .fa-edit {
+  margin: 0px 5px 0px 5px; 
+}
