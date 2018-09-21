@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Table, Alert, Jumbotron, Container, Button } from 'reactstrap';
-import { editItem, removeItem } from '../../actions'
+import { editItem, archiveItem } from '../../actions'
 import Total from '../Total'
 import './style.css';
 import 'font-awesome/css/font-awesome.min.css';
 
-const Items = ({ items, editItemIndex, removeItemIndex }) => (
+const Items = ({ items, editItemIndex, archivedItemIndex }) => (
   <div className="items-container">
     <h3>Items</h3>
     <Jumbotron fluid>
@@ -31,7 +31,7 @@ const Items = ({ items, editItemIndex, removeItemIndex }) => (
               <td>{ Number(Number(items[item].qty) * Number(items[item].price)).toFixed(2) }</td>
               <td><Button className="fa fa-edit" 
                    name="edit" title="edit details" onClick={() => editItemIndex(item)}/>
-                  <Button className="fa fa-trash" onClick= {() => removeItemIndex(item)} name="delete" title="remove this row"/> </td>
+                  <Button className="fa fa-trash" onClick= {() => archivedItemIndex(item)} name="delete" title="remove this row"/> </td>
             </tr>
           ))
         }
@@ -42,6 +42,7 @@ const Items = ({ items, editItemIndex, removeItemIndex }) => (
             <td></td>
             <td><Alert color="dark">{<Total/>}
               </Alert></td>
+            <td><Button className="fa fa-archive" name="archive" title="Archive" /></td>
           </tr>
         }
       </tbody>
@@ -60,8 +61,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    editItemIndex: (index) => dispatch(editItem(index)),
-    removeItemIndex: (index) => dispatch(removeItem(index))
+    /**
+     * Archive
+     * Delete
+     * Edit
+     */
+    archivedItemIndex: (index) => dispatch(archiveItem(index)),
+    editItemIndex: (index) => dispatch(editItem(index))
+
   }
 }
 

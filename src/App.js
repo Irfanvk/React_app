@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect } from 'react-redux'
 import './App.css';
+import Archive from './components/archive'
 import Items from './components/Items'
 import NewItem from './components/NewItem'
 
@@ -12,6 +13,7 @@ class App extends Component {
           <h1 className="App-title">Illuminate - react-redux</h1>
         </header>
         <NewItem data={this.props.editData}/>
+        <Archive />
         <Items />
       </div>
     );
